@@ -100,9 +100,9 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'cmciateq',
         'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
-        'PORT' : '',
+        'PASSWORD' : '1A2B3C4D5E',
+        'HOST' : 'cmciateq.ca6aemxa5teh.us-east-1.rds.amazonaws.com',
+        'PORT' : '3306',
         #'OPTIONS' : {'init_command': '"SET sql_mode="STRICT_ALL_TABLES'}
     }
 }
