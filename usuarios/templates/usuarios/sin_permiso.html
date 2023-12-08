@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{%block title %}
+    Sin permisos
+{% endblock %}
+
+{% block content %}
+<main>
+  <h2>Ups, no tienes permiso para entrar a esta página, por favor <a href="{% url 'usuarios:login' %}">Inicia Sesión</a> con una cuenta que tenga los permisos que requieres para entrar.</h2>
+</main>
+  {% endblock %}
+

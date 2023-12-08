@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block estilos %}
+{% endblock %}
+    
+{%block title %}
+    Control Metrológico
+{% endblock %}
+
+
+{% block content %}
+<main class="main_menu">
+    <br><br><br>
+
+    <section class="box_menu">
+        <section class="item_menu_p">
+            <a href="{% url 'calibracion:calibracion'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/login2.jpg" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Calibración</label>
+                </div>
+            </a>
+        </section>
+
+        <section class="item_menu_p">
+            <a href="{% url 'verificacion:verificacion'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/login4.jpg" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Verificación</label>
+                </div>
+            </a>
+        </section>
+    </section>
+    <div class="box_button_table">
+        <div class="div_button_guardar">
+            <a href="{% url 'core:menuPrincipal' %}">
+                <button class="btn" type="button">Regresar</button>
+            </a>   
+        </div>
+    </div>
+</main>
+{% endblock %}

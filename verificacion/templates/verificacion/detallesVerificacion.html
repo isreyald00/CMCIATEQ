@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{%block title %}
+Detalles de verificación
+{% endblock %}
+
+{% block content %}
+<main>
+    {% if verificacion %}
+    <div class="id_folio_text">
+        <h3 class="folio_text">No. de informe: {{ verificacion.num_informe }} </h3>
+        <h3 class="id_text">Equipo: {{ verificacion.id_verificacion }} </h3>
+    </div>
+    <hr class="RedLine_ID">
+
+    <section class="box">
+
+        <section class="box_img_equipo">
+            <img src="{{ img_eq }}" alt="imagen">
+        </section>
+
+        <section class="datos-generales">
+            <div>
+                <label>Fecha de verificación</label>
+                <input value="{{verificacion.fecha}}" disabled>
+            </div>
+
+            <div>
+                <label>Proveedor de verificación</label>
+                <input value="{{verificacion.id_responsable}}" disabled>
+            </div>
+
+            <div>
+                <label>Patrón utilizado</label>
+                <input value="{{verificacion.id_patron}}" disabled>
+            </div>
+
+            <div>
+                <label>Aprobó</label>
+                <input value="{{verificacion.id_aprobación}}" disabled>
+            </div>
+        </section>
+    </section>
+    <br>
+
+    <section class="box_table">
+        <div class="table-container">
+            <table class="table_main2">
+                <thead>
+                    <tr>
+                        <th>Punto de verificación</th>
+                        <th>Unidad</th>
+                        <th>Lectura equipo</th>
+                        <th>Lectura patrón</th>
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="item">
+                        <td>
+                            {{ verificacion.puntoVer1 }}
+                        </td>
+                        <td>
+                            {{unidad_error}}
+                        </td>
+                        <td>
+                            {{verificacion.lecEq1}}
+                        </td>
+                        <td>
+                            {{verificacion.lecPatron1}}
+                        </td>
+                        <td>
+                            {{verificacion.errorVer1}}
+                        </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            {{ verificacion.puntoVer2 }}
+                        </td>
+                        <td>
+                            {{unidad_error}}
+                        </td>
+                        <td>
+                            {{verificacion.lecEq2}}
+                        </td>
+                        <td>
+                            {{verificacion.lecPatron2}}
+                        </td>
+                        <td>
+                            {{verificacion.errorVer2}}
+                        </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            {{ verificacion.puntoVer3 }}
+                        </td>
+                        <td>
+                            {{unidad_error}}
+                        </td>
+                        <td>
+                            {{verificacion.lecEq3}}
+                        </td>
+                        <td>
+                            {{verificacion.lecPatron3}}
+                        </td>
+                        <td>
+                            {{verificacion.errorVer3}}
+                        </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            {{ verificacion.puntoVer4 }}
+                        </td>
+                        <td>
+                            {{unidad_error}}
+                        </td>
+                        <td>
+                            {{verificacion.lecEq4}}
+                        </td>
+                        <td>
+                            {{verificacion.lecPatron4}}
+                        </td>
+                        <td>
+                            {{verificacion.errorVer4}}
+                        </td>
+                    </tr>
+                    <tr class="item">
+                        <td>
+                            {{ verificacion.puntoVer5 }}
+                        </td>
+                        <td>
+                            {{unidad_error}}
+                        </td>
+                        <td>
+                            {{verificacion.lecEq5}}
+                        </td>
+                        <td>
+                            {{verificacion.lecPatron5}}
+                        </td>
+                        <td>
+                            {{verificacion.errorVer5}}
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <br><br>
+
+    <div class="box_dictamen">
+        <div class="dictamen">
+            <label>Dictamen</label>
+            <input value="{{verificacion.dictamen}}" disabled style="text-align: center;">
+        </div>
+    </div>
+    <br>
+
+    <div class="box_button">
+        <div class="div_button_guardar">
+            <a href="{% url 'verificacion:historial'  %}">
+                <button class="btn" type="button">Regresar</button>
+            </a>
+        </div>
+
+        <div class="div_button_guardar">
+            <a href="{% url 'verificacion:generar_pdf' id=verificacion.id_verificacion pk=verificacion.num_informe error=unidad_error %}">
+                <button class="btn" type="button">Exportar en PDF</button>
+            </a>
+        </div>
+
+        {% if verificacion.doc %}
+        <div class="div_button_guardar">
+            <a href="{{ verificacion.doc.url }}">
+                <button class="btn" type="button">Ver documento</button>
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+    {% else %}
+    <p>No se encuentra la el registro de verificación especificado: {{ calibracion.cod_cer_cal }}.</p>
+    {% endif %}
+</main>
+{% endblock %}

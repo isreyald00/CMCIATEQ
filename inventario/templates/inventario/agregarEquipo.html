@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+    Bienvenido a agregar equipo
+{% endblock %}
+
+{% block extra_script %}
+<!-- Asegúrate de agregar esto al final de tu template, antes de cerrar el body -->
+<script>
+    function agregarFila() {
+        var formsetPrefix = "{{ formset.prefix }}";
+        var totalFormsInput = $("#id_" + formsetPrefix + "-TOTAL_FORMS");
+        var formIndex = parseInt(totalFormsInput.val());
+
+        // Obtener el formulario vacío y reemplazar los prefijos
+        var newForm = $("#empty-form").html().replace(/__prefix__/g, formIndex);
+        var newRow = $(newForm);
+
+        // Actualizar los atributos 'name' en los elementos de formulario
+        newRow.find('[name]').each(function() {
+            var newName = $(this).attr('name').replace('__prefix__', formIndex);
+            $(this).attr('name', newName);
+        });
+
+        // Agregar la nueva fila al cuerpo de la tabla
+        $("#nuevos_crit").append(newRow);
+
+        // Actualizar el total de formularios
+        totalFormsInput.val(formIndex + 1);
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="ico-box">
+                <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+                <div><h3>Datos generales</h3></div>
+            </div>
+            <section class="box">
+                <section class="datos-generales1">
+                    <div>
+                        <label for="{{ form.activo_fijo.id_for_label }}">Activo fijo</label>
+                        {{ form.activo_fijo }}
+                        {{ form.activo_fijo.errors }}
+                    </div>
+                
+                    <div>
+                        <label for="{{ form.nombre_eq.id_for_label }}">Nombre</label>
+                        {{ form.nombre_eq }}
+                        {{ form.nombre_eq.errors }}
+                    </div>
+                
+                    <div>
+                        <label for="{{ form.marca.id_for_label }}">Marca</label>
+                        {{ form.marca }}
+                        {{ form.marca.errors }}
+                    </div>
+                        
+                    <div>
+                        <label for="{{ form.modelo.id_for_label }}">Modelo</label>
+                        {{ form.modelo }}
+                        {{ form.modelo.errors }}
+                    </div>
+                
+                    <div>
+                        <label for="{{ form.n_serie.id_for_label }}">Número de serie</label>
+                        {{ form.n_serie }}
+                        {{ form.n_serie.errors }}
+                    </div> 
+
+                    <div>
+                        <label for="{{ form.accesorios.id_for_label }}">Accesorios</label>
+                        {{ form.accesorios }}
+                        {{ form.accesorios.errors }}
+                    </div> 
+                </section>
+
+                <section class="datos-generales1">
+                    <div>
+                        <label for="{{ form.id_direccion_esp.id_for_label }}">Dirección de especialidad</label>
+                        {{ form.id_direccion_esp }}
+                        {{ form.id_direccion_esp.errors }}
+                    </div>
+            
+                    <div>
+                        <label for="{{ form.id_magnitud.id_for_label }}">Magnitud</label>
+                        {{ form.id_magnitud }}
+                        {{ form.id_magnitud.errors }}
+                    </div>
+            
+                    <div>
+                        <label for="{{ form.id_sede.id_for_label }}">Sede</label>
+                        {{ form.id_sede }}
+                        {{ form.id_sede.errors }}
+                    </div>
+                
+                    <div>
+                        <label for="{{ form.id_clasificacion.id_for_label }}">Clasificación</label>
+                        {{ form.id_clasificacion }}
+                        {{ form.id_clasificacion.errors }}
+                    </div>
+                
+                    <div>
+                        <label for="{{ form.id_responsable.id_for_label }}">Responsable</label>
+                        {{ form.id_responsable }}
+                        {{ form.id_responsable.errors }}
+                    </div>
+                </section>
+            </section>
+            
+            <div class="ico-box">
+                <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+                <div><h3>Archivos multimedia</h3></div>
+            </div>
+            <section class="archivos">
+                <div class="boxSelect1">
+                    <div>
+                        <label for="{{ form.imagen.id_for_label }}">Agregar imagen</label>
+                        {{ form.imagen }}
+                        {{ form.imagen.errors }}
+                    </div>
+                    
+                    {% if formset %}
+                        {% for form_data in formset %}
+                            <div>
+                                <label for="{{ form_data.url.id_for_label }}">Subir Documentos</label>
+                                {{ form_data.url }}
+                                {{ form_data.url.errors}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    
+                    <div class="boxSelect1" id="nuevos_crit">
+                    </div>
+
+                    <div id="empty-form" style="display: none;">
+                        {{ formset.empty_form.url }}
+                        {{ formset.empty_form.url.errors }}
+                    </div>
+                </div>
+                
+
+                <div class="div_button_guardar">
+                    <button class="btn" type="button" id="{{ formset.prefix }}" onclick="agregarFila()">Agregar otro documento</button>
+                </div>
+                
+                {{ formset.management_form }}
+
+            </section>
+
+            <div class="ico-box">
+                <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+                <div><h3>Seguimiento y control</h3></div>
+            </div>
+            <section class="seguimientoM">
+                <label for="{{ form.necesita_mant.id_for_label }}">{{ form.necesita_mant.label }}</label>
+                <br><br>
+                {{ form.necesita_mant }}
+                {{ form.necesita_mant.errors }}
+            </section>
+        
+            <section class="seguimientoM">
+                <label for="{{ form.necesita_cal.id_for_label }}">{{ form.necesita_cal.label }}</label>
+                <br><br>
+                {{ form.necesita_cal }}
+                {{ form.necesita_cal.errors }}
+            </section>
+
+            <section class="seguimientoM">
+                <label for="{{ form.necesita_ver.id_for_label }}">{{ form.necesita_ver.label }}</label>
+                <br><br>
+                {{ form.necesita_ver }}
+                {{ form.necesita_ver.errors }}
+            </section>
+        </section>
+        
+        <div class="div_button_guardar">
+            <button class="btn" type="submit">Guardar</button>
+          </div>
+    </form>
+</main>
+{% endblock %}

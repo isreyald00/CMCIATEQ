@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load cal_filters %}
+
+ 
+{% block title %}
+    Registro de calibracion
+{% endblock %}
+ 
+{% block content %}
+<main>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="id_folio_text">
+        <h3>ID: {{form.id_especificacion}}{{id_equipo}}</h3>
+    </div>
+    <hr class="RedLine_ID">
+    
+    <section class="box">
+
+        <section class="box_img_equipo">
+            <img src="{{img_eq}}" alt="imagen">
+        </section>
+
+        <section class="datos-generales">
+            <div>
+                <label>Fecha de calibración</label>
+                {{ form.fecha }}
+                {{form.fecha.errors}}
+            </div>
+
+            <div>
+                <label>Código del certificado de calibración</label>
+                {{form.cod_cer_cal}}
+                {{form.cod_cer_cal.errors}}
+            </div>
+
+            <div>
+                <label>Proveedor de calibración</label>
+                {{ form.proveedor}}
+                {{ form.proveedor.errors }}
+            </div>
+        
+            <div>
+                <label>Patrón utilizado</label>
+                {{ form.id_patron}}
+                {{form.id_patron.errors}}
+            </div> 
+        </section>
+    </section>
+    <br><br>
+
+    <section class="box_table">
+        <table class="table_criterio">
+            {{ formset.management_form }}
+            <thead class="text-center">
+                <tr>
+                    <th>Criterios de <br>aceptación</th>
+                    <th>Valor<br>Esperado</th>
+                    <th>Valor real</th>
+                    <th>Unidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for form_data in formset %}
+                <tr class="item">
+                    <td>
+                        {{ criterios_dict|get_nombre:form_data.id_criterio.value }}
+                        {{ form_data.id_criterio }}
+                    </td>
+                    <td>
+                        {{ criterios_dict|get_rango:form_data.id_criterio.value }} {{ criterios_dict|get_valor_esp:form_data.id_criterio.value }}
+                    </td>
+                    <td>
+                        {{ form_data.valor }}
+                        {{form.valor.errors}}
+                    </td>
+                    <td>
+                        {{ criterios_dict|get_unidad:form_data.id_criterio.value }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <br><br>
+
+    <section class="archivos">
+        <div class="boxSelect1">
+            <div>
+                <label for="documento">Adjuntar documento</label>
+                {{ form.doc}}
+                {{form.doc.errors}}
+            </div>
+        </div>
+    </section>
+
+    <div class="div_button_guardar">
+        <button class="btn" type="submit">Guardar</button>
+    </div>
+
+</form>
+</main>
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+ 
+{% block title %}
+    Registro de calibracion
+{% endblock %}
+ 
+{% block content %}
+<main>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="id_folio_text">
+        <h3>ID: {{id_eq}}</h3>
+    </div>
+    <hr class="RedLine_ID">
+    
+    <section class="box">
+
+        <section class="box_img_equipo">
+            <img src="{{img_eq}}" alt="imagen">
+        </section>
+
+        <section class="datos-generales">
+            <div>
+                <label>Fecha de verificacion</label>
+                {{ form.fecha}}
+                {{form.fecha.errors}}
+            </div>
+
+            <div>
+                <label>Responsable de verificacion</label>
+                {{form.id_responsable}}
+                {{form.id_responsable.errors}}
+            </div>
+        
+            <div>
+                <label>Patrón utilizado</label>
+                {{ form.id_patron}}
+                {{form.id_patron.errors}}
+            </div> 
+
+            <div>
+                <label>Aprobó</label>
+                {{ form.id_aprobación}}
+                {{form.id_aprobación.errors}}
+            </div> 
+        </section>
+    </section>
+    <br><br>
+
+    <section>
+        <table class="table_criterio">
+            <thead class="text-center">
+                <tr>
+                    <th>Punto de verificacion</th>
+                    <th></th>
+                    <th>Lectura equipo</th>
+                    <th></th>
+                    <th>Lectura patrón</th>
+                    <th></th>
+                    <th>Error</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="item">
+                    <td>
+                        {{ form.puntoVer1 }}
+                        {{ form.puntoVer1.errors }}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecEq1}}
+                        {{form.lecEq1.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecPatron1}}
+                        {{form.lecPatron1.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.errorVer1}}
+                        {{form.errorVer1.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                </tr>
+                <tr class="item">
+                    <td>
+                        {{ form.puntoVer2 }}
+                        {{ form.puntoVer2.errors }}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecEq2}}
+                        {{form.lecEq2.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecPatron2}}
+                        {{form.lecPatron2.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.errorVer2}}
+                        {{form.errorVer2.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                </tr>
+                <tr class="item">
+                    <td>
+                        {{ form.puntoVer3 }}
+                        {{ form.puntoVer3.errors }}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecEq3}}
+                        {{form.lecEq3.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecPatron3}}
+                        {{form.lecPatron3.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.errorVer3}}
+                        {{form.errorVer3.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                </tr>
+                <tr class="item">
+                    <td>
+                        {{ form.puntoVer4 }}
+                        {{ form.puntoVer4.errors }}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecEq4}}
+                        {{form.lecEq4.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecPatron4}}
+                        {{form.lecPatron4.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.errorVer4}}
+                        {{form.errorVer4.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                </tr>
+                <tr class="item">
+                    <td>
+                        {{ form.puntoVer5 }}
+                        {{ form.puntoVer5.errors }}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecEq5}}
+                        {{form.lecEq5.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.lecPatron5}}
+                        {{form.lecPatron5.errors}}
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                    <td>
+                        {{form.errorVer5}}
+                        {{form.errorVer5.errors}}
+
+                    </td>
+                    <td>
+                        {{unidad_error}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <br><br>
+
+    <section class="archivos">
+        <div class="boxSelect1">
+            <div class="dictamen">
+                <label>Dictamen</label>
+                {{ form.dictamen}}
+                {{ form.dictamen.errors}}
+            </div> 
+            <div>
+                <label for="documento">Adjuntar documento</label>
+                {{ form.doc}}
+                {{form.doc.errors}}
+            </div>
+        </div>
+    </section>
+<br><br><br>
+    <div class="div_button_guardar">
+        <button class="btn" type="submit">Guardar</button>
+    </div>
+</form>
+</main>
+{% endblock %}

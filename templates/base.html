@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M³: Sistema de control Metrológico</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'estilos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'menuEstilos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'mensajes_styles.css' %}">
+    {% block estilos %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="{% static 'script_filtros.js' %}"></script>
+    {% block extra_script %}{% endblock %}
+</head>
+
+<body>
+    <!-- Menú superior -->
+    <header>
+        <div class="left-section">
+            <div class="img_ico_logo">
+                <img src="/media/imgs/img/logo_ciateq.png" alt="CIATEQ" class="ico_logo">
+            </div>
+            <div><a href="{% url 'core:menuPrincipal'%}" class="URL_Main">CIATEQ:
+                    <span> Control Metrológico</span></a>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="user-info">
+                <img src="/media/imgs/img/ico_user.png" alt="Usuario" class="ico_User">
+                <span>{{ user.nombre }} {{ user.apellido_p }}</span>
+            </div>
+            <div class="menu-toggle">
+                <img src="/media/imgs/img/ico_menu.png" alt="Menú" class="ico_Menu">
+                <h3>Menu</h3>
+            </div>
+        </div>
+    </header>
+
+    {% if user.is_authenticated %}
+    <div class="sidebar">
+        <img src="/media/imgs/img/ico_close.png" alt="Cerrar" class="sidebar-close">
+        <div class="box_menu_elements">
+            <li><a href="{% url 'core:menuPrincipal'%}"><img src="/media/imgs/img/ico_home.png" alt="Inicio"
+                        class="ico_menu1"> Inicio</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'usuarios:registro'%}"><img src="/media/imgs/img/ico_manage2.png"
+                        alt="Panel administrativo" class="ico_menu1"> Panel administrativo</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'inventario:inventarioGral'%}"><img src="/media/imgs/img/ico_stock2.png"
+                        alt="Inventario general" class="ico_menu2"> Inventario general</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'metrologia:metrologia'%}"><img src="/media/imgs/img/icon_Metrologia.png"
+                        alt="Metrología" class="ico_menu2"> Control Metrológico</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'mantenimiento:mantenimiento'%}"><img src="/media/imgs/img/ico_mantenimiento.png"
+                        alt="Mantenimiento" class="ico_menu2"> Mantenimiento</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'calendario:calendario'%}"><img src="/media/imgs/img/ico_calendar.png" alt="Calendario"
+                        class="ico_menu2"> Calendario</a></li>
+        </div>
+        <div class="box_menu_elements">
+            <li><a href="{% url 'usuarios:logout'%}"><img src="/media/imgs/img/ico_logout.png" alt="Cerrar sesion"
+                        class="ico_menu2"> Cerrar sesion</a></li>
+        </div>
+    </div>
+    {% else %}
+    <div class="sidebar">
+        <img src="/media/imgs/img/ico_close.png" alt="Cerrar" class="sidebar-close">
+        <div class="box_menu_elements">
+            <div class="box_menu_elements">
+                <li><a href="{% url 'core:menuPrincipal'%}"><img src="/media/imgs/img/ico_home.png" alt="Inicio"
+                            class="ico_menu1"> Inicio</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'usuarios:login'%}"><img src="/media/imgs/img/ico_user.png" alt="Iniciar sesion"
+                            class="ico_menu1"> Iniciar sesión</a></li>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+
+    <div class="container_page">
+        <!-- Div para el texto de bienvenida centrado en la parte superior -->
+        <div class="aling_title">
+            <hr class="RedLine_Title">
+            <div class="title">
+                <h2>{% block title %}{% endblock %}</h2>
+            </div>
+            <hr class="RedLine_Title">
+        </div>
+
+        <!-- Contenido debajo del div superior -->
+        <div class="container container-below-center">
+
+            {% if messages %}
+            <div id="messages-container">
+                {% for message in messages %}
+                <div
+                    class="message {% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}">
+                    {{ message|safe }}
+                    <button type="button" onclick="cerrarMensaje(this)">Cerrar</button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <script>
+            document.querySelector(".menu-toggle").addEventListener("click", function () {
+                document.querySelector(".sidebar").style.width = "250px";
+            });
+
+            document.querySelector(".sidebar-close").addEventListener("click", function () {
+                document.querySelector(".sidebar").style.width = "0";
+            });
+
+            function cerrarMensaje(elemento) {
+                elemento.parentElement.style.display = 'none';
+            }
+        </script>
+    </div>
+    <footer id="footer">
+        <p>CIATEQ - 2023</p>
+    </footer>
+</body>
+
+</html>

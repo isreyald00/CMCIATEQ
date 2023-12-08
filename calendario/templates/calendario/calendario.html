@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block title %}
+Calendario
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" type="text/css" href="{% static 'fullcalendar/lib/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="container_excel-btn">
+    <section class="box_button_table">
+        <section class="container_btn_b-f">
+            <section class="container_btns">
+                <div class="div_button_guardar">
+                    <a href="{% url 'core:menuPrincipal' %}">
+                        <button class="btn" type="button">Regresar</button>
+                    </a>
+                </div>
+            </section>
+ 
+            <section class="container_btns">
+                <div class="box_buscar">
+                    <div><img src="/media/imgs/img/ico_search1.png" alt="Search Icon"></div>
+                    <div><input type="text" id="inputBusqueda" placeholder="ID o responsable"></div>
+                </div>
+ 
+                <div class="box_filtro">
+                    <div><img src="/media/imgs/img/ico_filter1.png" alt="Filter Icon"></div>
+                    <div>
+                        <select id="filtroPrincipal" onchange="mostrarSublista()">
+                            <option value="">Filtro</option>
+                            <option value="direccion">Direccion de especialidad</option>
+                            <option value="sede">Sede</option>
+                            <option value="clasificacion">Clasificacion</option>
+                            <option value="tipo">Tipo de evento</option>
+                        </select>
+                    </div>
+        
+                    <div id="sublistaDireccion" style="display: none;">
+                        <!-- Contenido de la sublista para Dirección de especialidad -->
+                        <select onchange="filtrarCalendario('Dirección de especialidad',this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Ingeniería De Plantas">IP - Ingeniería De Plantas</option>
+                            <option value="Ingeniería Virtual Y Manufactura">IV - Ingeniería Virtual Y Manufactura</option>
+                            <option value="Laboratorios">LS - Laboratorios</option>
+                            <option value="Sistemas de Medición">MD - Sistemas de Medición</option>
+                            <option value="Plásticos Y Materiales Avanzados">PM - Plásticos Y Materiales Avanzados</option>
+                            <option value="Sistemas Mecánicos">SM - Sistemas Mecánicos</option>
+                            <option value="TI- Electrónica Y  Control">TT - TI- Electrónica Y  Control</option>
+                        </select>
+                    </div>
+                
+                    <div id="sublistaSede" style="display: none;">
+                        <!-- Contenido de la sublista para Sede -->
+                        <select onchange="filtrarCalendario('Sede', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Hidalgo">Hidalgo</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Querétaro">Querétaro</option>
+                            <option value="San Luis Potosí">San Luis Potosí</option>
+                            <option value="Tabasco">Tabasco</option>
+                        </select>
+                    </div>
+                
+                    <div id="sublistaClasificacion" style="display: none;">
+                        <!-- Contenido de la sublista para Clasificacion -->
+                        <select onchange="filtrarCalendario('Clasificacion', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Accesorio">Accesorio</option>
+                            <option value="Instrumento">Instrumento</option>
+                            <option value="Patron">Patron</option>
+                        </select>
+                    </div>
+
+                    <div id="sublistaTipo" style="display: none;">
+                        <!-- Contenido de la sublista para Clasificacion -->
+                        <select onchange="filtrarCalendario('Tipo de evento', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Calibración">Calibración</option>
+                            <option value="Verificación">Verificación</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container_btns">
+                <div class="container_counter">
+                    <span id="numeroRegistrosCal">{{eventos_totales}} eventos registrados.</span>
+                </div>
+            </section>
+
+        </section>
+    </section>
+</main>
+
+<div style="display: flex; align-items: center; justify-content: center;">
+<div id="calendar" style="margin-left: 5%; margin-right: 5%; max-width: 1350px; width: 100%;">
+</div>
+</div>
+
+<!-- Ventana emergente (modal) personalizada -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <br>
+        <h2 id="modalTitulo" class="text-center_modal">Detalles del Evento</h2>
+        <section class="box_table" id="tabla">
+            <table class="table_criterio_modal">
+                <tbody>
+                    <tr class="item">
+                        <td class="text-left_L">Evento: </td>
+                        <td id="modalContenido1" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">ID de Equipo: </td>
+                        <td id="modalContenido2" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">Fecha: </td>
+                        <td id="modalContenido3" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">Responsable: </td>
+                        <td id="modalContenido4" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<!-- Estilos CSS para la ventana emergente -->
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        max-width: 400px;
+        width: 80%;
+        height: 30vh;
+        border-radius: 20px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Script JavaScript para controlar la ventana emergente -->
+<script>
+    function mostrarModal(titulo, contenido1, contenido2, contenido3, contenido4) {
+        document.getElementById('modalTitulo').innerText = titulo;
+        document.getElementById('tabla').innerHTML;
+        document.getElementById('modalContenido1').innerHTML = contenido1;
+        document.getElementById('modalContenido2').innerHTML = contenido2;
+        document.getElementById('modalContenido3').innerHTML = contenido3;
+        document.getElementById('modalContenido4').innerHTML = contenido4;
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function cerrarModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+</script>
+
+{% endblock %}
+
+{% block extra_script %}
+<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+    var calendarUI = document.getElementById('calendar');
+    var calendar;
+
+    // Inicializar el calendario con todos los eventos
+    function inicializarCalendario() {
+        calendar = new FullCalendar.Calendar(calendarUI, {
+            headerToolbar: {
+                left: 'prev next today',
+                center: 'title',
+                right:  'dayGridMonth,dayGridDay,dayGridWeek,listMonth'
+            },
+            events: [
+                {% for evento in eventos %}
+                    {
+                        title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                        start: "{{ evento.proxima|date:'Y-m-d' }}",
+                        allDay: true,
+                        color: "{{ evento.color }}",
+                        textColor: '#000000',
+                        responsable: '{{ evento.responsable }}'
+                    },
+                {% endfor %}
+            ],
+            eventClick: function(info) {
+                // Construye un mensaje personalizado con información detallada del evento
+                var mensaje = info.event.title + '\n'+
+                    'Fecha: ' + info.event.start.toLocaleDateString() + '\n' +
+                    'Responsable: ' + info.event.extendedProps.responsable;
+
+                // Muestra un modal con información detallada del evento
+                alert(mensaje);
+            },
+        });
+        calendar.setOption('locale','es');
+        calendar.render();
+    }
+
+    // Función para filtrar el calendario
+    window.filtrarCalendario = function(superF, filtro) {
+
+        // Filtrar eventos según el valor seleccionado
+        var eventosFiltrados = [];
+
+        // Agrega eventos al array eventosFiltrados según el filtro
+        {% for evento in eventos %}
+            if (filtro === "todos" || "{{ evento.dirEsp }}" === filtro ) {
+                eventosFiltrados.push({
+                    title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                    start: "{{ evento.proxima|date:'Y-m-d' }}",
+                    allDay: true,
+                    color: "{{ evento.color }}",
+                    textColor: '#000000',
+                    responsable: '{{ evento.responsable }}'
+                });
+            } else if (filtro === "todos" || "{{ evento.sede }}" === filtro ) {
+                eventosFiltrados.push({
+                    title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                    start: "{{ evento.proxima|date:'Y-m-d' }}",
+                    allDay: true,
+                    color: "{{ evento.color }}",
+                    textColor: '#000000',
+                    responsable: '{{ evento.responsable }}'
+                });
+            } else if (filtro === "todos" || "{{ evento.clasificacion }}" === filtro ) {
+                eventosFiltrados.push({
+                    title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                    start: "{{ evento.proxima|date:'Y-m-d' }}",
+                    allDay: true,
+                    color: "{{ evento.color }}",
+                    textColor: '#000000',
+                    responsable: '{{ evento.responsable }}'
+                });
+            }  else if (filtro === "todos" || "{{ evento.tipo }}" === filtro ) {
+                eventosFiltrados.push({
+                    title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                    start: "{{ evento.proxima|date:'Y-m-d' }}",
+                    allDay: true,
+                    color: "{{ evento.color }}",
+                    textColor: '#000000',
+                    responsable: '{{ evento.responsable }}'
+                });
+            }
+        {% endfor %}
+
+        // Actualiza los eventos en el calendario
+        calendar.removeAllEvents();
+        calendar.addEventSource(eventosFiltrados);
+        $("#numeroRegistrosCal").text(eventosFiltrados.length + " eventos coinciden con el filtro: '" +superF +">"+ filtro +"'");
+    }
+
+    $("#inputBusqueda").on("input", function () {
+        // Obtener el valor actual del campo de búsqueda
+        var valorBusqueda = $(this).val().toLowerCase();
+        var eventosFiltrados = [];
+        
+        {% for evento in eventos %}
+            var idEquipo = "{{evento.id_equipo}}".toLowerCase();
+            var n_responsable = "{{evento.responsable}}".toLowerCase();
+            var e_responsable = "{{evento.emailResp}}".toLowerCase();
+            var fecha = "{{ evento.proxima.year}}-{{evento.proxima.month}}-{{evento.proxima.day}}".toLowerCase();
+
+            if (
+                    (idEquipo && idEquipo.includes(valorBusqueda)) || 
+                    (n_responsable && n_responsable.includes(valorBusqueda)) || 
+                    (e_responsable && e_responsable.includes(valorBusqueda)) || 
+                    (fecha && fecha.includes(valorBusqueda))
+                ){ 
+                    eventosFiltrados.push({
+                        title: "{{ evento.tipo }}: {{ evento.id_equipo }}",
+                        start: "{{ evento.proxima|date:'Y-m-d' }}",
+                        allDay: true,
+                        color: "{{ evento.color }}",
+                        textColor: '#000000',
+                        responsable: '{{ evento.responsable }}'
+                    });
+                }
+        {% endfor %}
+        var num_eventos = eventosFiltrados.length
+        
+        // Actualizar el número de registros coincidentes
+        if (valorBusqueda === ""){
+            $("#numeroRegistrosCal").text("Sin filtros seleccinados");
+        } else{
+            var mensaje = num_eventos + " eventos coinciden con el filtro: '" + $(this).val() +"'"
+            console.log(mensaje)
+            $("#numeroRegistrosCal").text(mensaje);
+        }
+        calendar.removeAllEvents();
+        calendar.addEventSource(eventosFiltrados);
+    });
+
+    // Inicializar el calendario al cargar la página
+    inicializarCalendario();
+});
+
+$(document).ready(function () {
+    
+});
+
+</script>
+{% endblock %}

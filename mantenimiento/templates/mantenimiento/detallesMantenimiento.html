@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+Detalles de mantenimiento {{tipo}}
+{% endblock %}
+
+{% block content %}
+<main>
+    {% if equipo %}
+    <div class="id_folio_text">
+        <h3 class="id_text">ID: {{ equipo.id_especificacion_mant }} </h3>
+        <h3 class="folio_text">Folio: {{ equipo.num_folio }} </h3>
+    </div>
+    <hr class="RedLine_ID">
+
+    <section class="box">
+        <section class="box_img_equipo">
+            <img src="{{img_eq}}" alt="imagen">
+        </section>
+
+        <section class="datos-generales">
+            <div>
+                <label>Fecha de mantenimiento</label>
+                <input value="{{equipo.fecha}}" disabled>
+            </div>
+
+            <div>
+                <label>Tipo de mantenimiento</label>
+                <input value="{{equipo.tipo_mant}}" disabled>
+            </div>
+
+            <div>
+                <label>Responsable/Proovedor</label>
+                <input value="{{equipo.id_responsable}} {{equipo.proveedor}}" disabled>
+            </div>
+
+            <div>
+                <label>Responsable de captura</label>
+                <input value="{{equipo.id_responsable_cap}}" disabled>
+            </div>
+        </section>
+    </section>
+
+    <section class="archivos">
+        <div class="boxSelect1">
+            <div class="box_descripcion">
+                <div><label for="marca">Comentario</label></div>
+                <div><textarea rows="10" cols="102"
+                    placeholder="{{equipo.comentario}}" disabled></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="box_button">
+        <div class="div_button_guardar">
+            <a href="{% url 'mantenimiento:historial' %}">
+                <button class="btn" type="button">Regresar</button>
+            </a>
+        </div>
+
+        <div class="div_button_guardar">
+            <a
+                href="{% url 'mantenimiento:generar_pdf' tipo=tipo pk=equipo.num_folio id=equipo.id_especificacion_mant %}">
+                <button class="btn" type="button">Exportar en PDF</button>
+            </a>
+        </div>
+
+        <div class="div_button_guardar">
+            <button class="btn" type="button">Ver documento</button>
+        </div>
+    </div>
+
+    {% else %}
+    <p>No se encuentra la el registro de mantenimiento especificado: {{ equipo.num_folio }}.</p>
+    {% endif %}
+</main>
+{% endblock %}

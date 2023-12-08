@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+    Registro de mantenimiento
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="id_folio_text">
+            <h3>Equipo: {{form.id_especificacion_mant}} {{id_eq}}</h3>
+            {{form.id_responsable_cap}}
+        </div>
+        <div class="id_folio_text">
+            <h4>Descripción: {{ com_eq.comentario }}</h4>
+        </div>
+        <hr class="RedLine_ID">
+        
+        <section class="box">
+            <section class="box_img_equipo">
+                <img src="{{img_eq}}" alt="imagen">
+            </section>
+            
+            <section class="datos-generales">
+                <div>
+                <label>Fecha de mantenimiento</label>
+                {{form.fecha}}
+                {{form.fecha.errors}}
+                </div>
+        
+                <div>
+                <label>Tipo de mantenimiento</label>
+                {{form.tipo_mant}}
+                {{form.tipo_mant.errors}}
+                </div>
+        
+                <div>
+                <label>Responsable/proveedor</label>
+                {{form.id_responsable}} {{form.proveedor}}
+                {{form.id_responsable.errors}} {{form.proveedor.errors}}
+                </div>
+        
+                <div>
+                    <label for="documento">Adjuntar documento</label>
+                    {{form.evidencia}}
+                    {{form.evidencia.errors}}
+                </div>
+            </section>
+        </section>
+
+        <section class="archivos">
+            <div class="boxSelect1">
+                <div class="box_descripcion">
+                  <div><label for="marca">Descripción</label></div>
+                  <div>{{form.comentario}}{{form.comentario.errors}}</div>
+                </div>
+            </div>
+        </section>
+        <div class="div_button_guardar">
+            <button class=btn type="submit">Guardar</button>
+        </div>
+    </form>
+</main>
+{% endblock %}

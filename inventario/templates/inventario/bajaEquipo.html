@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+Bienvenido a baja de equipo
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="id_folio_text">
+        <h3>ID: {{equipo}}</h3>
+    </div>
+    <hr class="RedLine_ID">
+
+    <form method="post">
+        {% csrf_token %}
+        <br>
+        <section class="box">
+            <section class="datos-generales1">
+                <div>
+                    <label>Responsable del equipo</label>
+                    <input type="text" value="{{responsable}}" disabled>
+                </div>
+            </section>
+
+            <section class="datos-generales1">
+                <div>
+                    <label>Quien aprueba</label>
+                    {{form.id_aprueba}}
+                </div>
+            </section>
+        </section>
+
+        <div class="box_descripcion">
+            <div><label>Motivos</label></div>
+            <div><textarea name="motivos" rows="10" cols="93" placeholder="Descripción de los motivos">{{form.motivos}}</textarea></div>
+        </div>
+        <br><br><br>
+
+        <div class="div_button_guardar">
+            <button class="btn" id="{{ formset.prefix }}">Confirmar</button>
+        </div>
+
+    </form>
+</main>
+{% endblock %}

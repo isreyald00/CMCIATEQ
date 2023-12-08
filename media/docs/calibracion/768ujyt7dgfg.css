@@ -1,0 +1,914 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container_page {
+    min-height: 85vh;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    height: 60px;
+    margin-top: 10vh;
+    font-size: 18px;
+
+    background-image: url('/media/imgs/img/background_base2.jpg');
+    background-size: cover; /* Ajusta el tamaño de la imagen para que cubra todo el elemento */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 3%;
+}
+
+.main_menu {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 3%;
+    margin-bottom: 10%;
+}
+
+textarea {
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+}
+
+section {
+    margin-bottom: 0px;
+}
+
+label {
+    font-weight: bold;
+    padding: 10px;
+}
+
+.seguimientoM {
+    margin-bottom: 30px;
+    padding-left: 3%;
+}
+
+.archivos {
+    width: 100%;
+    padding-left: 3.5%;
+    padding-top: 3%;
+    max-width: 800px;
+}
+
+
+input {
+    max-width: 800px;
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+select {
+    max-width: 800px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+.div_button_guardar {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.btn {
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.div_button_center {
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.div_button_center .btn {
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.div_button_add {
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 1%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn_add {
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 10%;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    padding-top: 2%;
+}
+
+.datos-generales {
+    flex: 4;
+    padding: 10px;
+    min-width: 42%;
+}
+
+.datos-generales1 {
+    flex: 4;
+    padding: 10px;
+    min-width: 47%;
+}
+
+.opciones {
+    flex: 4;
+    padding: 10px;
+    min-width: 42%;
+}
+
+.box label {
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 30px;
+}
+
+.box input {
+    max-width: 300px;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+.datos-generales1 select {
+    max-width: 320px;
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+.opciones select {
+    max-width: 320px;
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+.box_Select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    padding-bottom: 3%;
+}
+
+.boxSelect1 {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 800px;
+    padding-bottom: 3%;
+}
+
+.boxSelect2 {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 800px;
+}
+
+.ico-box {
+    padding-top: 3%;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ico {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.ops {
+    width: 100%;
+    padding: 0px;
+    border: 1.5px solid #7B2D26;
+    background: #F6F6F6;
+}
+
+.opsL {
+    font-weight: bold;
+    padding: 0px;
+}
+
+
+.title {
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.RedLine_Title {
+    max-width: 800px;
+    width: 50%;
+    border: 1px solid #7B2D26;
+    border-radius: 50%;
+}
+
+.RedLine_ID {
+    max-width: 800px;
+    width: 75%;
+    border: 1px solid #7B2D26;
+    border-radius: 50%;
+}
+
+.RedLine_Detalles {
+    max-width: 800px;
+    width: 95%;
+    border: 1px solid #7B2D26;
+    border-radius: 50%;
+}
+
+.subtema {
+    padding-left: 2%;
+}
+
+.box2 {
+    display: flex;
+    justify-content: space-around;
+    max-width: 800px;
+    padding-top: 1%;
+}
+
+
+.box_criterios div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.box_criterios label {
+    flex: 2;
+    margin-right: 10px;
+    text-align: left;
+}
+
+.box_criterios input {
+    max-width: 300px;
+    margin-right: 5%;
+    flex: 3;
+}
+
+.box_criterios select {
+    max-width: 300px;
+    margin-right: 5%;
+    flex: 3;
+}
+
+
+
+.table_criterio {
+    max-width: 100%;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center_modal {
+    text-align: center;
+    margin-bottom: 7%;
+}
+
+.text-left_L {
+    text-align: left;
+    margin: 3%;
+    padding: 3%;
+}
+
+.text-left_R {
+    text-align: left;
+    padding-left: 5%;
+    padding: 3%;
+}
+
+.table_criterio_modal {
+    overflow: hidden;
+    width: 90%;
+}
+
+.box3 section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.box3 label {
+    flex: 2;
+    margin-right: 10px;
+    text-align: left;
+}
+
+.box3 input {
+    max-width: 300px;
+    margin-right: 5%;
+    flex: 3;
+}
+
+.box3 select {
+    max-width: 300px;
+    margin-right: 5%;
+    flex: 3;
+}
+
+.box_descripcion {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.box_descripcion label {
+    flex: 1;
+}
+
+.box_descripcion textarea {
+    flex: 5;
+    max-width: 95%;
+    padding: 1.5%;
+}
+
+.box_img_equipo {
+    max-width: 100%;
+    max-height: 400px;
+    min-width: 50%;
+    min-height: 100px;
+    border-radius: 5px;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_img_equipo img {
+    border: 1.5px solid #7B2D26;
+    border-radius: 5px;
+    max-width: 100%;
+    /* La imagen no superará el ancho del contenedor */
+    max-height: 100%;
+    /* La imagen no superará la altura del contenedor */
+    width: auto;
+    /* Restablece el ancho a automático */
+    height: auto;
+    /* Restablece la altura a automático */
+}
+
+.box_img_equipo_D {
+    max-width: 100%;
+    max-height: 500px;
+    min-width: 50%;
+    min-height: 100px;
+    border-radius: 5px;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_img_equipo_D img {
+    border: 1.5px solid #7B2D26;
+    border-radius: 5px;
+    max-width: 100%;
+    /* La imagen no superará el ancho del contenedor */
+    max-height: 100%;
+    /* La imagen no superará la altura del contenedor */
+    width: auto;
+    /* Restablece el ancho a automático */
+    height: auto;
+    /* Restablece la altura a automático */
+}
+
+.box .box_img_equipo_D {
+    flex: 2;
+}
+
+.box .box_img_equipo {
+    flex: 2;
+}
+
+.box .datos-generales {
+    flex: 4;
+}
+
+.box_img_equipo_Details {
+    max-width: 100%;
+    max-height: 200px;
+    min-width: 30%;
+    min-height: 100px;
+    border-radius: 5px;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_img_equipo_Details img {
+    border: 1.5px solid #7B2D26;
+    border-radius: 5px;
+    max-width: 100%;
+    /* La imagen no superará el ancho del contenedor */
+    max-height: 100%;
+    /* La imagen no superará la altura del contenedor */
+    width: auto;
+    /* Restablece el ancho a automático */
+    height: auto;
+    /* Restablece la altura a automático */
+}
+
+.box .box_img_equipo_Details {
+    flex: 2;
+}
+
+.dictamen {
+    text-align: center;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.box_dictamen {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.id_folio_text {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.folio_text {
+    margin-right: 5%;
+}
+
+.id_text {
+    margin-left: 5%;
+}
+
+.box_button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.box_button div {
+    margin-left: 3%;
+}
+
+.box_button .btn {
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.box_table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    /* Establecer el radio de las esquinas para el contenedor */
+    /*margin-bottom: 20%; */
+    overflow: hidden;
+    /* Evita que los bordes internos se salgan del contenedor */
+}
+
+.table_main {
+    width: 100%;
+    /* Hacer que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse;
+}
+
+.table_main thead tr th,
+.table_main tbody tr td {
+    margin: 5%;
+    border: 2px solid #000000;
+    padding: 1%;
+    /* Agregar espaciado interno para celdas */
+    overflow: hidden;
+    /* Evita que los bordes internos se salgan del contenedor */
+}
+
+.table_main th {
+    width: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #19535F;
+    /* Cambiar el fondo del encabezado si lo deseas */
+    color: #fff;
+    /* Cambiar el color del texto en el encabezado si lo deseas */
+}
+
+.table_main select {
+    width: 90%;
+    margin: 5%;
+    border: 2px solid #19535F;
+}
+
+
+.table_main2 {
+    width: 100%;
+    /* Hacer que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse;
+}
+
+.table_main2 thead tr th,
+.table_main2 tbody tr td {
+    margin: 5%;
+    border: 2px solid #000000;
+    padding: 1%;
+    /* Agregar espaciado interno para celdas */
+    overflow: hidden;
+    /* Evita que los bordes internos se salgan del contenedor */
+}
+
+.table_main2 th {
+    width: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #7B2D26;
+    /* Cambiar el fondo del encabezado si lo deseas */
+    color: #fff;
+    /* Cambiar el color del texto en el encabezado si lo deseas */
+}
+
+.table_main2 select {
+    width: 90%;
+    margin: 5%;
+    border: 2px solid #7B2D26;
+}
+
+
+.table_Details {
+    width: 100%;
+    /* Hacer que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse;
+}
+
+.table_Details thead tr th,
+.table_Details tbody tr td {
+    margin: 5%;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    padding: 2%;
+    /* Agregar espaciado interno para celdas */
+    overflow: hidden;
+    /* Evita que los bordes internos se salgan del contenedor */
+}
+
+.table_Details th {
+    width: 10%;
+    background-color: #7B2D26;
+    /* Cambiar el fondo del encabezado si lo deseas */
+    color: #fff;
+    /* Cambiar el color del texto en el encabezado si lo deseas */
+}
+
+.datos-generales1 .div_button_guardar{
+    text-align: center;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.datos-generales1 .div_button_guardar .btn{
+    background-color: #7B2D26;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.box_button_table {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.box_button_table div {
+    margin-left: 3%;
+}
+
+.box_button_table .btn {
+    background-color: #19535F;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.box_button_table .div_button_guardar {
+    text-align: center;
+    padding-bottom: 0.5%;
+}
+
+.box_buscar {
+    max-width: 180px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1.5px solid #19535F;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.box_buscar img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0px;
+    margin-top: 1px;
+}
+
+.box_buscar input {
+    margin-bottom: 0%;
+    border: none;
+    width: 95%;
+    padding: 5px;
+    border-radius: 3px;
+    background: #f6f6f600;
+    outline: none;
+}
+
+.box_buscar select {
+    margin-bottom: 0%;
+    border: none;
+    max-width: 150px;
+    width: 90%;
+    padding: 5px;
+    border-radius: 3px;
+    background: #f6f6f600;
+    outline: none;
+}
+
+.box_filtro {
+    max-width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1.5px solid #19535F;
+    border-radius: 3px;
+}
+
+.box_filtro div {
+    margin-left: 1%;
+}
+
+.box_filtro img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0px;
+    margin-top: 1px;
+}
+
+.box_filtro select {
+    margin-bottom: 0%;
+    border: none;
+    width: 100%;
+    padding: 1px;
+    border-radius: 3px;
+    background: #f6f6f600;
+    outline: none;
+}
+
+.box_button_table .box_qr {
+    margin-left: 0.5%;
+    max-width: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #19535F;
+    border-radius: 3px;
+}
+
+.box_qr img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.box_button_table .div_button_regresar {
+    text-align: center;
+    padding-bottom: 0.5%;
+    margin-right: 13%;
+}
+
+.box_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item_menu {
+    max-width: 350px;
+    margin: 4%;
+    min-width: 90px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #19535F;
+    color: #F6F6F6;
+    border: 2px solid #7B2D26;
+    border-radius: 10px;
+}
+
+.item_menu_p {
+    max-width: 350px;
+    min-width: 90px;
+    margin: 4%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #19535F;
+    color: #F6F6F6;
+    border: 2px solid #7B2D26;
+    border-radius: 10px;
+}
+
+.img_item {
+    flex: 6;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_item img {
+    border-radius: 10px;
+    max-width: 100%;
+    /* La imagen no superará el ancho del contenedor */
+    max-height: 100%;
+    /* La imagen no superará la altura del contenedor */
+    width: auto;
+    /* Restablece el ancho a automático */
+    height: auto;
+    /* Restablece la altura a automático */
+}
+
+.text_item {
+    flex: 2;
+    padding: 5%;
+}
+
+
+.container_excel-btn {
+    max-width: 1000px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 3%;
+}
+
+.box_excel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #19535F;
+    border-radius: 5px;
+    padding: 1%;
+    width: 40%;
+    min-width: 35%;
+    margin-bottom: 2%;
+}
+
+.box_excel input {
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 5%;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #19535F;
+    background: #F6F6F6;
+}
+
+.box_excel .div_button_guardar {
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.box_excel .btn {
+    background-color: #19535F;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 60%;
+}
+
+
+.container_btn_b-f {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 55%;
+    min-width: 300px;
+    margin-bottom: 2%;
+}
+
+.container_btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.container_counter {
+    margin-top: 1%;
+    border: 1px solid #19535F;
+    border-radius: 3px;
+    padding: 1%;
+    width: 95%;
+    text-align: center;
+}

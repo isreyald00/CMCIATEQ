@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MMM: Sistema de control Metrológico</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'menuPrincipal_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'mensajes_styles.css' %}">
+    <script defer src="{% static 'script.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <header>
+        <div class="left-section">
+            <div class="img_ico_logo">
+                <img src="/media/imgs/img/logo_ciateq.png" alt="CIATEQ" class="ico_logo">
+            </div>
+            <div><a href="{% url 'core:menuPrincipal'%}" class="URL_Main">CIATEQ:
+                    <span> Control Metrológico</span></a>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="user-info">
+                <img src="/media/imgs/img/ico_user.png" alt="Usuario" class="ico_User">
+                <span>{{ user.nombre }} {{ user.apellido_p }}</span>
+            </div>
+            <div class="menu-toggle">
+                <img src="/media/imgs/img/ico_menu.png" alt="Menú" class="ico_Menu">
+                <h3>Menu</h3>
+            </div>
+        </div>
+    </header>
+
+    <article class="sidebar_menu">
+        <div class="sidebar">
+            <img src="/media/imgs/img/ico_close.png" alt="Cerrar" class="sidebar-close">
+            <div class="box_menu_elements">
+                <li><a href="{% url 'core:menuPrincipal'%}"><img src="/media/imgs/img/ico_home.png" alt="Inicio"
+                            class="ico_menu1"> Inicio</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'usuarios:registro'%}"><img src="/media/imgs/img/ico_manage2.png"
+                            alt="Panel administrativo" class="ico_menu1"> Panel administrativo</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'inventario:inventarioGral'%}"><img src="/media/imgs/img/ico_stock2.png"
+                            alt="Inventario general" class="ico_menu2"> Inventario general</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'metrologia:metrologia'%}"><img src="/media/imgs/img/icon_Metrologia.png"
+                            alt="Metrología" class="ico_menu2"> Control Metrológico</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'mantenimiento:mantenimiento'%}"><img src="/media/imgs/img/ico_mantenimiento.png"
+                            alt="Mantenimiento" class="ico_menu2"> Mantenimiento</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'calendario:calendario'%}"><img src="/media/imgs/img/ico_calendar.png" alt="Calendario"
+                            class="ico_menu2"> Calendario</a></li>
+            </div>
+            <div class="box_menu_elements">
+                <li><a href="{% url 'usuarios:logout'%}"><img src="/media/imgs/img/ico_logout.png" alt="Cerrar sesion"
+                            class="ico_menu2"> Cerrar sesion</a></li>
+            </div>
+        </div>
+    </article>
+
+    <div class="container_page">
+    <section class="banner full" id="banner">
+        <article class="slide">
+            <img src="/media/imgs/img/login1.jpg" alt="">
+            <div class="inner">
+
+                <h2 class="h2_title">Menú Principal</h2>
+                <hr class="line_banner">
+                <p>MetroMasterManager: Sistema de control metrológico</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login2.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Menú Principal</h2>
+                <hr class="line_banner">
+                <p>MetroMasterManager: Sistema de control metrológico</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login3.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Menú Principal</h2>
+                <hr class="line_banner">
+                <p>MetroMasterManager: Sistema de control metrológico</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login4.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Menú Principal</h2>
+                <hr class="line_banner">
+                <p>MetroMasterManager: Sistema de control metrológico</p>
+
+            </div>
+        </article>
+    </section>
+    <div class="dots-container" id="dots-container"></div>
+
+
+
+
+    <div class="aling_title">
+        <hr style="border: 1px solid white">
+        {% if messages %}
+        <div id="messages-container">
+            {% for message in messages %}
+            <div
+                class="message {% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}">
+                {{ message|safe }}
+                <button type="button" onclick="cerrarMensaje(this)">Cerrar</button>
+            </div>
+            {% endfor %}
+        </div>
+        <script>
+            function cerrarMensaje(elemento) {
+                elemento.parentElement.style.display = 'none';
+            }
+        </script>
+        {% else %}
+        <div class="title"></div>
+        {% endif %}
+        <hr style="border: 1px solid white;">
+    </div>
+
+    <section class="box_menu">
+        <section class="item_menu_p">
+            <a href="{% url 'inventario:inventarioGral'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/menu_invGral.png" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Inventario general</label>
+                </div>
+            </a>
+        </section>
+
+        <section class="item_menu_p">
+            <a href="{% url 'metrologia:metrologia'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/menu_metrologia.jpg" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Control Metrológico</label>
+                </div>
+            </a>
+        </section>
+
+        <section class="item_menu_p">
+            <a href="{% url 'mantenimiento:mantenimiento'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/menu_mantenimiento.jpg" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Mantenimiento</label>
+                </div>
+            </a>
+        </section>
+
+        <section class="item_menu_p">
+            <a href="{% url 'calendario:calendario'%}">
+                <div class="img_item">
+                    <img src="/media/imgs/img/menu_calendario.jpg" alt="imagen">
+                </div>
+                <div class="text_item">
+                    <label>Calendario</label>
+                </div>
+            </a>
+        </section>
+
+    </section>
+</div>
+
+<footer class="footer">
+    <p>CIATEQ - 2023</p>
+</footer>
+</body>
+
+</html>

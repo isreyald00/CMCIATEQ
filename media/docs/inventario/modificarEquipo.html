@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+Bienvenido a editar equipo
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Datos generales</h3>
+            </div>
+        </div>
+        <section class="box">
+            <section class="datos-generales1">
+                <div>
+                    <label for="{{ form.activo_fijo.id_for_label }}">Activo fijo</label>
+                    {{ form.activo_fijo }}
+                </div>
+
+                <div>
+                    <label for="{{ form.nombre_eq.id_for_label }}">Nombre</label>
+                    {{ form.nombre_eq }}
+                </div>
+
+                <div>
+                    <label for="{{ form.marca.id_for_label }}">Marca</label>
+                    {{ form.marca }}
+                </div>
+
+                <div>
+                    <label for="{{ form.modelo.id_for_label }}">Modelo</label>
+                    {{ form.modelo }}
+                </div>
+
+                <div>
+                    <label for="{{ form.n_serie.id_for_label }}">Número de serie</label>
+                    {{ form.n_serie }}
+                </div>
+
+                <div>
+                    <label for="{{ form.accesorios.id_for_label }}">Accesorios</label>
+                    {{ form.accesorios }}
+                </div>
+            </section>
+
+            <section class="datos-generales1">
+                <div>
+                    <label for="{{ form.id_direccion_esp.id_for_label }}">Dirección de especialidad</label>
+                    {{ form.id_direccion_esp }}
+                </div>
+
+                <div>
+                    <label for="{{ form.id_magnitud.id_for_label }}">Magnitud</label>
+                    {{ form.id_magnitud }}
+                </div>
+
+                <div>
+                    <label for="{{ form.id_sede.id_for_label }}">Sede</label>
+                    {{ form.id_sede }}
+                </div>
+
+                <div>
+                    <label for="{{ form.id_clasificacion.id_for_label }}">Clasificación</label>
+                    {{ form.id_clasificacion }}
+                </div>
+
+                <div>
+                    <label for="{{ form.id_responsable.id_for_label }}">Responsable</label>
+                    {{ form.id_responsable }}
+                </div>
+            </section>
+        </section>
+
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Archivos multimedia</h3>
+            </div>
+        </div>
+        <section class="archivos">
+            <div class="boxSelect1">
+                <div>
+                    <label for="{{ form.imagen.id_for_label }}">Agregar imagen</label>
+                    {{ form.imagen }}
+                </div>
+            </div>
+        </section>
+        </section>
+
+        <div class="div_button_guardar">
+            <button class="btn" type="submit">Guardar</button>
+        </div>
+    </form>
+</main>
+{% endblock %}

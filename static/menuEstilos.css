@@ -1,0 +1,161 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding-left: 1%;
+    padding-right: 1%;
+    max-height: 2%;
+    max-width: 100%;
+    background-color: #19535F
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 3;
+    color: #fff;
+}
+
+.img_ico_logo{
+    display: flex;
+    align-items: flex-end;
+    margin-right: 2%;
+}
+
+h1 {
+    margin: 0;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 2;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-info i {
+    margin-right: 5px;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.sidebar {
+    width: 0;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+}
+
+.sidebar a {
+    padding-left: 5px;
+    padding-top: 10%;
+    width: 100%;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.sidebar-close {
+    align-self: flex-end;
+    margin: 10px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+
+.ico_logo {
+    margin-right: 2%;
+    width: 52px;
+    height: 42px;
+}
+
+.ico_Menu {
+    margin-right: 3%;
+    width: 25px;
+    height: 25px;
+}
+
+.ico_User {
+    width: 25px;
+    height: 25px;
+}
+
+.URL_Main {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.box_menu_elements li a img {
+    vertical-align: middle; /* Alinea verticalmente el texto con la imagen */
+    margin-left: 10px; /* Ajusta el margen izquierdo según sea necesario */
+  }
+
+.ico_menu1 {
+    padding-right: 2%;
+    width: 23px;
+    height: 23px;
+}
+
+.ico_menu2 {
+    padding-right: 2%;
+    width: 20px;
+    height: 20px;
+}
+
+.title {
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.RedLine_Title {
+    max-width: 400px;
+    border: 1px solid #7B2D26;
+    border-radius: 50%;
+}
+
+.aling_title {
+    padding-top: 3%;
+}

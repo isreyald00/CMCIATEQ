@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{%block title %}
+Detalles de calibración
+{% endblock %}
+
+{% block content %}
+<main>
+    {% if calibracion %}
+    <div class="id_folio_text">
+        <h3 class="folio_text">Certificado de calibración: {{ calibracion.cod_cer_cal }} </h3>
+        <h3 class="id_text">Equipo: {{ calibracion.id_especificacion }} </h3>
+    </div>
+    <hr class="RedLine_ID">
+
+    <section class="box">
+
+        <section class="box_img_equipo">
+            <img src="{{ img_eq }}" alt="imagen">
+        </section>
+
+        <section class="datos-generales">
+            <div>
+                <label>Fecha de calibración</label>
+                <input value="{{calibracion.fecha}}" disabled>
+            </div>
+
+            <div>
+                <label>Proveedor de calibración</label>
+                <input value="{{calibracion.proveedor}}" disabled>
+            </div>
+
+            <div>
+                <label>Patrón utilizado</label>
+                <input value="{{calibracion.id_patron}}" disabled>
+            </div>
+
+            <div>
+                <label>Responsable de captura</label>
+                <input value="{{calibracion.resp_cap}}" disabled>
+            </div>
+        </section>
+    </section>
+    <br>
+
+    <section class="box_table">
+        <div class="table-container">
+            <table class="table_main2">
+            <thead class="text-center">
+                <tr>
+                    <th>Criterio</th>
+                    <th>Valor<br>Esperado</th>
+                    <th>Valor<br>Otenido</th>
+                    <th>Unidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for criterio in criterios_data %}
+                <tr class="item">
+                    {% for data in criterio%}
+                    <td>
+                        {{ data }}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </section>
+    <br><br>
+
+    <div class="box_dictamen">
+        <div class="dictamen">
+            <label>Dictamen</label>
+            <input value="{{calibracion.dictamen}}" disabled style="text-align: center;">
+        </div>
+    </div>
+    <br>
+
+    <div class="box_button">
+        <div class="div_button_guardar">
+            <a href="{% url 'calibracion:historial' %}">
+                <button class="btn" type="button">Regresar</button>
+            </a>
+        </div>
+
+        <div class="div_button_guardar">
+            <a href="{% url 'calibracion:generar_pdf' pk=calibracion.id_especificacion.id_equipo id=calibracion.cod_cer_cal %}">
+                <button class="btn" type="button">Exportar en PDF</button>
+            </a>
+        </div>
+
+        <div class="div_button_guardar">
+            <a href="{{ calibracion.doc.url }}">
+                <button class="btn" type="button">Ver documento</button>
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <p>No se encuentra la el registro de calibracion especificado: {{ calibracion.cod_cer_cal }}.</p>
+    {% endif %}
+</main>
+{% endblock %}

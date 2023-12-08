@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CIATEQ: Metro Master Manager</title>
+    <link rel="stylesheet" href="{% static 'login_styles.css' %}">
+    <script defer src="{% static 'script.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <section class="banner full" id="banner">
+        <article class="slide">
+            <img src="/media/imgs/img/login1.jpg" alt="">
+            <div class="inner">
+
+                <h2 class="h2_title">Metro Master Manager</h2>
+                <hr class="line_banner">
+                <p>Para control de calidad de equipos de medición</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login2.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Flujo</h2>
+                <hr class="line_banner">
+                <p>Placas de orificio</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login3.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Presión</h2>
+                <hr class="line_banner">
+                <p>Manometros, sensores</p>
+
+            </div>
+        </article>
+        <article class="slide">
+            <img src="/media/imgs/img/login4.jpg" alt="" />
+            <div class="inner">
+
+                <h2 class="h2_title">Temperatura</h2>
+                <hr class="line_banner">
+                <p>Termómetros, Hornos, Termopares</p>
+
+            </div>
+        </article>
+    </section>
+    <div class="dots-container" id="dots-container"></div>
+
+
+    <section class="login_container">
+      <form method="post">
+        {% csrf_token %}
+        <section>
+            <div class="text_center">
+                <h1>Inicio de sesión</h1>
+                <h3>Ingresa tus datos</h3>
+                {% if messages %}
+                {% for message in messages %}
+                <h5 style="color: white;">{{ message|safe }}</h5>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <section class="datos-generales">
+                <div>
+                    <div class="box_buscar">
+                        <div><img src="/media/imgs/img/ico_user1.png" alt="User Icon"></div>
+                        <div><label>Correo</label></div>
+                    </div>
+                    {{ form.username }}
+                    <div><label>{{ form.username.errors }}</label></div>
+                </div>
+
+                <div>
+                    <div class="box_buscar">
+                        <div><img src="/media/imgs/img/ico_key2.png" alt="Key Icon"></div>
+                        <div><label>Contraseña</label></div>
+                    </div>
+                    {{ form.password }}
+                    <div><label>{{ form.password.errors }}</label></div>
+                </div>
+            </section>
+
+            <section class="div_button_guardar">
+                <button class="btn">Ingresar</button>
+            </section>
+
+        </section>
+      </form>
+    </section>
+
+</body>
+
+</html>

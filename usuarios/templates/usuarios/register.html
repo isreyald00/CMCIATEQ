@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+ 
+ 
+{%block title %}
+Bienvenido a agregar usuario
+{% endblock %}
+ 
+ 
+{% block content %}
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Datos de usuario</h3>
+            </div>
+        </div>
+        <section class="box">
+            <section class="datos-generales1">
+                <div>
+                    <label> Nombre</label>
+                    {{ form.nombre }}
+                    {{ form.nombre.errors }}
+                </div>
+ 
+                <div>
+                    <label> Apellido paterno</label>
+                    {{ form.apellido_p }}
+                    {{ form.apellido_p.errors }}
+                </div>
+ 
+                <div>
+                    <label> Apellido materno</label>
+                    {{ form.apellido_m }}
+                    {{ form.apellido_m.errors }}
+                </div>
+            </section>
+ 
+            <section class="datos-generales1">
+                <div>
+                    <label>Correo</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div>
+                    <label>Tipo de usuario</label>
+                    {{ form.group }}
+                    {{ form.group.errors }}
+                </div>
+            </section>
+        </section>
+ 
+ 
+        <section class="box">
+            <section class="datos-generales1">
+                <div>
+                    <label>Contraseña</label>
+                    {{ form.password1 }}
+                    {{ form.password1.errors }}
+                </div>
+            </section>
+ 
+            <section class="datos-generales1">
+                <div>
+                    <label>Confirmar contraseña</label>
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+            </section>
+        </section>
+ 
+        <div class="div_button_guardar">
+            <button class="btn" type="submit">Registrar</button>
+        </div>
+    </form>
+</main>
+{% endblock %}
+

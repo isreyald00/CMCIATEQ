@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load cal_filters %}
+{% load filters %}
+
+{%block title %}
+Calibración
+{% endblock %}
+
+
+{% block content %}
+
+<main class="container_excel-btn">
+    <section class="box_button_table">
+        <section class="container_btn_b-f">
+            <section class="container_btns">
+                <div class="div_button_guardar">
+                    <a href="{% url 'metrologia:metrologia' %}">
+                        <button class="btn" type="button">Regresar</button>
+                    </a>
+                </div>
+ 
+                <div class="div_button_guardar">
+                    <a href="{% url 'calibracion:historial'%}">
+                        <button class="btn" type="button">Historial</button>
+                    </a>
+                </div>
+            </section>
+ 
+            <section class="container_btns">
+                <div class="box_buscar">
+                    <div><img src="/media/imgs/img/ico_search1.png" alt="Search Icon"></div>
+                    <div><input type="text" id="inputBusqueda" placeholder="ID o responsable"></div>
+                </div>
+                <div class="box_filtro">
+                    <div><img src="/media/imgs/img/ico_filter1.png" alt="Filter Icon"></div>
+                    <div>
+                        <select id="filtroPrincipal" onchange="mostrarSublista()">
+                            <option value="">Filtro</option>
+                            <option value="direccion">Direccion de especialidad</option>
+                            <option value="sede">Sede</option>
+                            <option value="clasificacion">Clasificacion</option>
+                        </select>
+                    </div>
+        
+                    <div id="sublistaDireccion" style="display: none;">
+                        <!-- Contenido de la sublista para Dirección de especialidad -->
+                        <select onchange="actualizarListaEquipos('Direccion de especialidad', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Ingeniería De Plantas">IP - Ingeniería De Plantas</option>
+                            <option value="Ingeniería Virtual Y Manufactura">IV - Ingeniería Virtual Y Manufactura</option>
+                            <option value="Laboratorios">LS - Laboratorios</option>
+                            <option value="Sistemas de Medición">MD - Sistemas de Medición</option>
+                            <option value="Plásticos Y Materiales Avanzados">PM - Plásticos Y Materiales Avanzados</option>
+                            <option value="Sistemas Mecánicos">SM - Sistemas Mecánicos</option>
+                            <option value="TI- Electrónica Y  Control">TT - TI- Electrónica Y  Control</option>
+                        </select>
+                    </div>
+                
+                    <div id="sublistaSede" style="display: none;">
+                        <!-- Contenido de la sublista para Sede -->
+                        <select onchange="actualizarListaEquipos('Sede', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Hidalgo">Hidalgo</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Querétaro">Querétaro</option>
+                            <option value="San Luis Potosí">San Luis Potosí</option>
+                            <option value="Tabasco">Tabasco</option>
+                        </select>
+                    </div>
+                
+                    <div id="sublistaClasificacion" style="display: none;">
+                        <!-- Contenido de la sublista para Clasificacion -->
+                        <select onchange="actualizarListaEquipos('Clasificacion', this.value);">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Accesorio">Accesorio</option>
+                            <option value="Instrumento">Instrumento</option>
+                            <option value="Patron">Patron</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container_btns">
+                <div class="container_counter">
+                    <span id="numeroRegistros">{{equipos_totales}} equipos registrados para control de calibración.</span>
+                </div>
+            </section>
+
+        </section>
+    </section>
+</main>
+
+<section class="box_table">
+    <div class="table-container">
+        <table class="table_main" id="tablaEquipos">
+            <thead>
+                <tr>
+                    <th nombreCol="id_equipo">ID del Equipo</th>
+                    <th>Periodo entre calibraciones</th>
+                    <th>Fecha de ultima calibración</th>
+                    <th>Fecha de proxima calibración</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if all_items %}
+                {% for item in all_items %}
+                {% with indicador=indicadores|get_item:item.id_equipo %}
+                <tr dir_e="{{ indicador.dirEsp }}" sede="{{ indicador.sede }}" clasif="{{ indicador.clasificacion }}" e_resp="{{ indicador.emailResp }}" n_resp="{{ indicador.nombreResp }}">
+                    <td>{{ item.id_equipo }}</td>
+                    <td>{{ item.periodo }}</td>
+                    <td>{{ item.ultima }}</td>
+                    <td>{{ item.proxima }}</td>
+                    <td>
+                        <select class="form-control" onchange="location = this.value;">
+                            <option value="">Selecciona una acción</option>
+                            <option value="{% url 'calibracion:modificarEsp' item.id_equipo %}">Editar periodo</option>
+                            <option value="{% url 'calibracion:registrarCal' item.id_equipo %}">Registrar calibración</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">No hay equipos registrados para control de calibración</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

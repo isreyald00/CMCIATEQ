@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{%block estilos %}
+    <style>
+        .equipo-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .equipo-fields, .equipo-qr, .equipo-download {
+            flex: 1;
+        }
+    </style>
+{% endblock %}
+
+{%block title %}
+    Bienvenido detalles para el mantenimiento
+{% endblock %}
+
+{% block content %}
+<main>
+        <div class="equipo-details">
+            {% if equipo %}
+                <div class="equipo-fields">
+                    <p>ID del Equipo: {{ equipo.id_equipo }}</p>
+                    <p>Periodo entre mantenimientos: {{ equipo.periodo }}</p>
+                    <p>Fecha de utlimo mantenimiento: {{ equipo.ultima }}</p>
+                    <p>Fecha de proximo mantenimiento: {{ equipo.proxima }}</p>
+                    <p>Comentario: {{ equipo.comentario }}</p>
+                    <p>Estado: {{equipo.estado }}</p>
+                </div>
+                
+            {% else %}
+                <p>No se encuentra la especificacion de mantenimiento para el equipo {{ equipo.id_equipo }}.</p>
+            {% endif %}   
+        </div>
+    </main>
+{% endblock %}

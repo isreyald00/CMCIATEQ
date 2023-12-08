@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{%block title %}
+    Modificación de la especificación para calibración
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="id_folio_text">
+            <h3>ID: {{id_equipo}}</h3>
+        </div>
+        <hr class="RedLine_ID">
+
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Especificación de Calibración</h3>
+            </div>
+        </div>
+
+        <section class="box3">
+            <section>
+                <div>
+                    <label for="marca">Periodo entre calibración</label>
+                    {{form.periodo}}
+                    {{form.periodo.errors}}
+                </div>
+            </section>
+        </section>
+        <br>
+        <div class="div_button_guardar">
+            <button type="submit" class="btn">Guardar</button>
+        </div>
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{%block title %}
+    Documentos de equipo
+{% endblock %}
+
+{% block extra_script %}
+    <script>
+        function subirArchivo() {
+        document.getElementById('importForm').submit();
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<main class="container_excel-btn">
+    <section class="box_button_table">
+
+    </section>
+</main>
+
+<section class="box_table">
+    <div class="table-container">
+        <table class="table_main" id="tablaEquipos">
+            <thead>
+                <tr>
+                    <th>ID de equipo</th>
+                    <th>Nombre documento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% if all_items %}
+                {% for item in all_items %}
+                        <tr>
+                            <td>{{ item.id_equipo }}</td>
+                            <td>{{ item.url.name }}</td>
+                            <td>
+                                <select class="form-control" onchange="location = this.value;">
+                                    <option value="">Selecciona una acción</option>
+                                    <option value="{{ item.url.url }}">Descargar</option>
+                                </select>
+                            </td>
+                        </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">No hay documentos registrados para este equipo.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<br><br>
+        <div class="box_button">
+            <div class="div_button_guardar">
+                <a href="{{request.META.HTTP_REFERER }}">
+                    <button class="btn" type="button">Regresar</button>
+                </a>   
+            </div>
+        </div>
+{% endblock %}

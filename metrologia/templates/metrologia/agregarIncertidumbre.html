@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+ 
+{% block title %}
+    Agregar criterio: Incertidumbre
+{% endblock %}
+ 
+{% block content %}
+<main>
+<form method="POST">
+    {% csrf_token %}
+    <div class="id_folio_text"><h3>ID: {{id_equipo}}</h3></div>
+    <hr class="RedLine_ID">
+    
+    <div class="ico-box">
+        <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+        <div><h3>Criterio metrológico</h3></div>
+    </div>
+    <h4>El equipo que seleccionó para control de calibración no tiene registrado el criterio 'Incertidumbre', favor de especificar los valores de dicho criterio para el equipo.</h4>
+    <table class="table_criterio">
+        <thead class="text-center">
+            <tr>
+                <th>Criterio</th>
+                <th>Rango</th>
+                <th>Valor Esperado</th>
+                <th>Unidad</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr class="item">
+                    <td>
+                        <input value="{{ criterio }}" readonly disabled>
+                    </td>
+                    <td>
+                        {{ form.rango }}
+                        {{ form.rango.errors }}
+                    </td>
+                    <td>
+                        {{ form.valor_esperado }}
+                        {{ form.valor_esperado.errors }}
+                    </td>
+                    <td>
+                        {{ form.id_unidad_criterio }}
+                        {{ form.id_unidad_criterio.errors }}
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="div_button_guardar">
+        <button class="btn" type="submit">Guardar</button>
+    </div>
+</form>
+</main>
+{% endblock %}

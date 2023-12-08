@@ -1,0 +1,382 @@
+{% extends "base.html" %}
+
+{%block title %}
+Detalles de equipo
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="id_folio_text">
+            <h3 class="id_text">ID: {{equipo.id}} </h3>
+            <h3 class="folio_text">Nombre: {{equipo.nombre_eq}} </h3>
+        </div>
+        <hr class="RedLine_ID">
+
+        <br>
+        <section class="box">
+            <section class="box_img_equipo_Details">
+                {% if equipo.imagen %}
+                    <img src="{{ equipo.imagen.url }}" alt="imagen">
+                {% else %}
+                    <img src="/media/imgs/img/ico_noImage1.png" alt="imagen">
+                {% endif %}
+            </section>
+
+            <section class="box_img_equipo_Details">
+                {% if equipo.codigo_qr %}
+                    <img src="{{ equipo.codigo_qr.url }}" alt="imagen">
+                {% else %}
+                    <img src="/media/imgs/img/ico_noImage1.png" alt="imagen">
+                {% endif %}
+            </section>
+        </section>
+
+        <br>
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_Datosgenerales.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Datos generales</h3>
+            </div>
+        </div>
+
+        <section class="box">
+            <section class="datos-generales1">
+                <div>
+                    <label>Activo fijo</label>
+                    <input type="text" value="{{ equipo.activo_fijo }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Dirección de especialidad</label>
+                    <input type="text" value="{{ equipo.id_direccion_esp }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Magnitud</label>
+                    <input type="text" value=" {{ equipo.id_magnitud }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Sede</label>
+                    <input type="text" value="{{ equipo.id_sede }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Responsable</label>
+                    <input type="text" value="{{ equipo.id_responsable }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Marca</label>
+                    <input type="text" value="{{ equipo.marca }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Modelo</label>
+                    <input type="text" value="{{ equipo.modelo }}" disabled readonly>
+                </div>
+        
+            </section>
+
+            <section class="datos-generales1">
+                <div>
+                    <label>Número de Serie</label>
+                    <input type="text" value="{{ equipo.n_serie }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Fecha de alta</label>
+                    <input type="text" value="{{ equipo.fecha_alta }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Accesorios</label>
+                    <input type="text" value="{{ equipo.accesorios }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Clasificación</label>
+                    <input type="text" value="{{ equipo.id_clasificacion }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Responsable de la alta</label>
+                    <input type="text" value="{{ equipo.id_responsable_alta }}" disabled readonly>
+                </div>
+        
+                <div>
+                    <label>Estatus del equipo</label>
+                    <input type="text" value="{{ equipo.estatus }}" disabled readonly>
+                </div>
+            </section>
+        </section>
+       
+        {% if EspecificacionMetrologia %}
+            <br>
+            <div class="ico-box">
+                <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+                <div>
+                    <h3>Control metrológico</h3>
+                </div>
+            </div>
+
+            <section class="box">
+                <section class="datos-generales1">
+                    <div>
+                        <label>Unidades</label>
+                        <input type="text" value="{{ EspecificacionMetrologia.unidades }}" disabled readonly>
+                    </div>
+
+                    <div>
+                        <label>Resolución de unidades</label>
+                        <input type="text" value="{{ EspecificacionMetrologia.res_unidades }}" disabled readonly>
+                    </div>
+                </section>
+            
+                <section class="datos-generales1">
+                    <div>
+                        <label>Intervalo de medición de unidades</label>
+                        <input type="text" value="{{ EspecificacionMetrologia.intervalo_medicion_unidades }}" disabled readonly>
+                    </div>
+                </section>
+
+                {% if CriteriosMetrologicos %}
+                    <section class="datos-generales1">
+                        <div class="table-container">
+                            <table class="table_Details">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" rowspan="2">Criterios</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for criterio in CriteriosMetrologicos%}
+                                    <tr>
+                                        <td>
+                                            {{ criterio.id_criterio }}
+                                        </td>
+                                        <td>
+                                            {{ criterio.rango }}
+                                        </td>
+                                        <td>
+                                            {{ criterio.valor_esperado }} {{ criterio.id_unidad_criterio.id }} 
+                                        </td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                {% endif %}
+            </section>
+                
+            {% if EspecificacionCalibracion or EspecificacionVerificacion %}
+                <section class="box">
+                    {% if EspecificacionCalibracion %}
+                        <section class="datos-generales1">
+                            <div class="table-container">
+                                <table class="table_Details">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Calibración</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fecha de ultima calibración</td>
+                                            <td>
+                                                {{ EspecificacionCalibracion.ultima }}
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Fecha de proxima calibración</td>
+                                            <td>
+                                                {{ EspecificacionCalibracion.proxima }}
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Periodo entre calibración</td>
+                                            <td>
+                                                {{ EspecificacionCalibracion.periodo }} meses
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Confirmación metrológica</td>
+                                            <td>
+                                                {{ EspecificacionCalibracion.estatus }}
+                                            </td>
+                                        </tr>
+                                        {% if equipo.estatus == "Activo" %}
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="div_button_guardar">
+                                                        <a href="{% url 'calibracion:registrarCal' equipo.id%}">
+                                                            <button class="btn" type="button">Realizar Calibración</button>
+                                                        </a>   
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    {% endif %}
+
+                    {% if EspecificacionVerificacion %}
+                        <section class="datos-generales1">
+                            <div class="table-container">
+                                <table class="table_Details">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" rowspan="2">Verificación</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fecha de ultima verificación</td>
+                                            <td>
+                                                {{ EspecificacionVerificacion.ultima }}
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Fecha de proxima verificación</td>
+                                            <td>
+                                                {{ EspecificacionVerificacion.proxima }}
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Periodo entre verificación</td>
+                                            <td>
+                                                {{ EspecificacionVerificacion.periodo }} mes(es)
+                                            </td>
+                                        </tr>
+                    
+                                        <tr>
+                                            <td>Confirmación metrológica</td>
+                                            <td>
+                                                {{ EspecificacionVerificacion.estatus }}
+                                            </td>
+                                        </tr>
+                                        
+                                        {% if equipo.estatus == "Activo" %}
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="div_button_guardar">
+                                                        <a href="{% url 'verificacion:registrarVer' equipo.id%}">
+                                                            <button class="btn" type="button">Realizar Verificación</button>
+                                                        </a>   
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    {% endif %}
+                </section>
+            {% endif %}
+
+        {% endif %}
+        
+        
+        {% if EspecificacionMantenimiento %}
+            <br>
+            <div class="ico-box">
+                <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+                <div>
+                    <h3>Control de mantenimiento</h3>
+                </div>
+            </div>
+
+            <section class="box">
+                <section class="datos-generales1">
+                    <div class="table-container">
+                        <table class="table_Details">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" rowspan="2">Mantenimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fecha de ultimo mantenimiento</td>
+                                    <td>
+                                        {{ EspecificacionMantenimiento.ultima }}
+                                    </td>
+                                </tr>
+            
+                                <tr>
+                                    <td>Fecha de proximo mantenimiento</td>
+                                    <td>
+                                        {{ EspecificacionMantenimiento.proxima }}
+                                    </td>
+                                </tr>
+            
+                                <tr>
+                                    <td>Periodo entre mantenimiento</td>
+                                    <td>
+                                        {{ EspecificacionMantenimiento.periodo }} meses
+                                    </td>
+                                </tr>
+            
+                                <tr>
+                                    <td>Estatus</td>
+                                    <td>
+                                        {{ EspecificacionMantenimiento.estado }}
+                                    </td>
+                                </tr>
+                                {% if equipo.estatus == "Activo" %}
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="div_button_guardar">
+                                                <a href="{% url 'mantenimiento:registrarInterno' equipo.id %}">
+                                                    <button class="btn" type="button">Realizar Mantenimiento</button>
+                                                </a>   
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+        {% endif %}
+        
+        <br><br>
+        <div class="box_button">
+            <div class="div_button_guardar">
+                <a href="{% url 'inventario:inventarioGral' %}">
+                    <button class="btn" type="button">Regresar</button>
+                </a>   
+            </div>
+        
+            <div class="div_button_guardar">
+                <a href="{% url 'inventario:generar_pdf' pk=equipo.id %}">
+                    <button class="btn" type="button">Exportar en PDF</button>
+                </a>
+            </div>
+        
+            <div class="div_button_guardar">
+                <a href="{% url 'inventario:documentos' equipo.id %}">
+                    <button class="btn" type="button">Ver documentos</button>
+                </a>
+            </div>
+
+            {% if equipo.codigo_qr %}
+                <div class="div_button_guardar">
+                    <a href="{{ equipo.codigo_qr.url }}" target="_blank">
+                        <button class="btn" type="button">Descargar QR</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

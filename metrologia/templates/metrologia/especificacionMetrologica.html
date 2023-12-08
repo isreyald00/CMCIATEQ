@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+ 
+{% block title %}
+Bienvenido a Especificación Metrológica
+{% endblock %}
+
+{% block extra_script %}
+<!-- Asegúrate de agregar esto al final de tu template, antes de cerrar el body -->
+<script>
+    function agregarFila() {
+        var formsetPrefix = "{{ formset.prefix }}";
+        var totalFormsInput = $("#id_" + formsetPrefix + "-TOTAL_FORMS");
+        var formIndex = parseInt(totalFormsInput.val());
+
+        // Obtener el formulario vacío y reemplazar los prefijos
+        var newForm = $("#empty-form").html().replace(/__prefix__/g, formIndex);
+        var newRow = $(newForm);
+
+        // Actualizar los atributos 'name' en los elementos de formulario
+        newRow.find('[name]').each(function() {
+            var newName = $(this).attr('name').replace('__prefix__', formIndex);
+            $(this).attr('name', newName);
+        });
+
+        // Agregar la nueva fila al cuerpo de la tabla
+        $("#nuevos_crit").append(newRow);
+
+        // Actualizar el total de formularios
+        totalFormsInput.val(formIndex + 1);
+    }
+</script>
+{% endblock %}
+ 
+{% block content %}
+<main>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="id_folio_text">
+            <h3>ID: {{id_equipo}}</h3>
+        </div>
+        <hr class="RedLine_ID">
+ 
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Datos metrológicos</h3>
+            </div>
+        </div>
+ 
+ 
+        <section class="box2">
+            <section>
+                <div>
+                    <label for="res_unidades">Resolución de unidades</label>
+                    {{form.res_unidades.errors}}
+                    {{form.res_unidades}}
+                </div>
+                <div>
+                    <label for="marca">Intervalo de medición de unidades</label>
+                    {{ form.intervalo_medicion_unidades}}
+                    {{ form.intervalo_medicion_unidades.errors}}
+                </div>
+            </section>
+ 
+            <div>
+                <label for="unidades">Unidades</label>
+                {{ form.unidades}}
+                {{ form.unidades.errors}}
+            </div>
+        </section>
+        <br>
+ 
+ 
+        <div class="ico-box">
+            <div><img src="/media/imgs/img/ico_EspecificacionMetrologica.png" alt="Datos generales" class="ico"></div>
+            <div>
+                <h3>Especificación metrológica</h3>
+            </div>
+        </div>
+ 
+        <h4 class="text-center">Criterios especificos</h4>
+        <br>
+
+        <table class="table_criterio" id="miTabla">
+            <thead class="text-center">
+                <tr>
+                    <th>Criterio</th>
+                    <th>Rango</th>
+                    <th>Valor Esperado</th>
+                    <th>Unidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="formset-body">
+                {% if formset %}
+                    {% for form_data in formset %}
+                        <tr class="item" id="formset-tr">
+                            <td>
+                                {{ form_data.id_criterio }}
+                                {{ form_data.id_criterio.errors }}
+                            </td>
+                            <td>
+                                {{ form_data.rango }}
+                                {{ form_data.rango.errors }}
+                            </td>
+                            <td>
+                                {{ form_data.valor_esperado }}
+                                {{ form_data.valor_esperado.errors }}
+                            </td>
+                            <td>
+                                {{ form_data.id_unidad_criterio }}
+                                {{ form_data.id_unidad_criterio.errors }}
+                            </td>
+                            <td>
+                                <!-- Puedes dejar este espacio en blanco o agregar acciones si es necesario -->
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+        <div id="nuevos_crit">
+        </div>
+
+        <div id="empty-form" style="display: none;">
+            <table class="table_criterio">
+                <thead class="text-center">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="formset-body">
+                    <tr class="item" >
+                        <td>
+                            {{ formset.empty_form.id_criterio }}
+                            {{ formset.empty_form.id_criterio.errors }}
+                        </td>
+                        <td>
+                            {{ formset.empty_form.rango }}
+                            {{ formset.empty_form.rango.errors }}
+                        </td>
+                        <td>
+                            {{ formset.empty_form.valor_esperado }}
+                            {{ formset.empty_form.valor_esperado.errors }}
+                        </td>
+                        <td>
+                            {{ formset.empty_form.id_unidad_criterio }}
+                            {{ formset.empty_form.id_unidad_criterio.errors }}
+                        </td>
+                        <td>
+                            <!--<button type="button" class="remove-form">Eliminar</button>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+ 
+        <div class="div_button_guardar">
+            <button class="btn" type="button" id="{{ formset.prefix }}" onclick="agregarFila()">Agregar criterio</button>
+        </div>
+        
+        {{ formset.management_form }}
+
+        <br><br>
+        <div class="div_button_guardar">
+            <button class="btn" type="submit">Guardar</button>
+        </div>
+
+
+
+
+    </form>
+</main>
+
+{% endblock %}
+

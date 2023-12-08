@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block title %}
+Calendario
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" type="text/css" href="{% static 'fullcalendar/lib/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="box_button_table">
+        <div class="div_button_guardar">
+            <a href="{% url 'core:menuPrincipal' %}">
+                <button class="btn" type="button">Regresar</button>
+            </a>
+        </div>
+
+        <div class="box_buscar">
+            <div><img src="/media/imgs/img/ico_search1.png" alt="Search Icon"></div>
+            <div><input type="text" placeholder="Buscar"></div>
+        </div>
+
+        <div class="box_qr">
+            <div><img src="/media/imgs/img/ico_qr4.png" alt="QR Icon"></div>
+        </div>
+
+        <div class="box_filtro">
+            <div><img src="/media/imgs/img/ico_filter1.png" alt="Filter Icon"></div>
+            <div><select onchange="location = this.value;">
+                    <option value="">Filtro</option>
+                    <option value="#">Dirección de especialidad </option>
+                    <option value="#">Sede</option>
+                    <option value=#>Tipo</option>
+                </select></div>
+        </div>
+    </div>
+</main>
+
+<div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">
+    <div id="calendar" style="margin-left: 5%; margin-right: 5%; max-width: 1350px; width: 100%;">
+    </div>
+</div>
+
+<!-- Ventana emergente (modal) personalizada -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <br>
+        <h2 id="modalTitulo" class="text-center_modal">Detalles del Evento</h2>
+        <section class="box_table" id="tabla">
+            <table class="table_criterio_modal">
+                <tbody>
+                    <tr class="item">
+                        <td class="text-left_L">Evento: </td>
+                        <td id="modalContenido1" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">ID de Equipo: </td>
+                        <td id="modalContenido2" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">Fecha: </td>
+                        <td id="modalContenido3" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+
+                    <tr class="item">
+                        <td class="text-left_L">Responsable: </td>
+                        <td id="modalContenido4" class="text-left_R">
+                            ---
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<!-- Estilos CSS para la ventana emergente -->
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        max-width: 400px;
+        width: 80%;
+        height: 30vh;
+        border-radius: 20px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Script JavaScript para controlar la ventana emergente -->
+<script>
+    function mostrarModal(titulo, contenido1, contenido2, contenido3, contenido4) {
+        document.getElementById('modalTitulo').innerText = titulo;
+        document.getElementById('tabla').innerHTML;
+        document.getElementById('modalContenido1').innerHTML = contenido1;
+        document.getElementById('modalContenido2').innerHTML = contenido2;
+        document.getElementById('modalContenido3').innerHTML = contenido3;
+        document.getElementById('modalContenido4').innerHTML = contenido4;
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function cerrarModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+</script>
+
+{% endblock %}
+
+{% block extra_script %}
+<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarUI = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarUI, {
+            headerToolbar: {
+                left: 'prev next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridDay,dayGridWeek,listMonth'
+            },
+            events: [
+                {% for evento in eventos %}
+                    {
+                title: "{{ evento.tipo }}",
+                id: "{{ evento.id_equipo }}",
+                start: "{{ evento.proxima|date:'Y-m-d' }}",
+                allDay: true,
+                color: "{{ evento.color }}",
+                textColor: '#000000',
+                responsable: '{{ evento.responsable }}'
+            },
+            {% endfor %}
+            ],
+
+        eventClick: function (info) {
+            // Construye un mensaje personalizado con información detallada del evento
+            var mensaje1 = info.event.title;
+
+            var mensaje2 = info.event.id;
+
+            var mensaje3 = info.event.start.toLocaleDateString();
+
+            var mensaje4 = info.event.extendedProps.responsable;
+
+            // Muestra un modal con información detallada del evento
+            mostrarModal('Detalles del Evento', mensaje1, mensaje2, mensaje3, mensaje4);
+        },
+        
+        dateClick: function (info) {
+            var clickedDate = info.date.toISOString().split('T')[0];
+
+            var eventosDelDia = calendar.getEvents().filter(function (evento) {
+                return evento.start.toISOString().split('T')[0] === clickedDate;
+            });
+
+            var listaEventosDelDia = '<ul>';
+            eventosDelDia.forEach(function (evento) {
+                listaEventosDelDia += '<li>' + evento.title + '</li>';
+            });
+            listaEventosDelDia += '</ul>';
+
+            alert('Eventos del día:\n' + listaEventosDelDia);
+        },
+        });
+    calendar.render();
+    calendar.setOption('locale', 'es');
+    });
+</script>
+
+
+{% endblock %}
